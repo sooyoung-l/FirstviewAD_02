@@ -490,14 +490,16 @@ body {
 .sca-item:nth-child(3) { animation: sca-fade-2 4.8s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
 
 .sca-text {
-  font-size: 13px;
-  font-weight: 500;
-  line-height: 20px;
+  font-family: 'LINE Seed KR', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 12px;
+  font-weight: 700 !important;
+  line-height: 22px;
   color: #111;
-  padding: 0 16px;
+  padding: 0 14px 0 16px;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  overflow: visible;
+  text-overflow: clip;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* 브랜드 행 */
