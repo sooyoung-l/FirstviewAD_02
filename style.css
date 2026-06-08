@@ -1,0 +1,554 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: #e8e8e8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ─── 전체 컨테이너 (375×812 모바일 뷰) ─── */
+.phone-frame {
+  position: relative;
+  width: 375px;
+  height: 812px;
+  background: #fff;
+  overflow: hidden;
+  border-radius: 40px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+
+/* ─── 배경 앱 화면 ─── */
+.bg-screen {
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 상태바 */
+.bg-statusbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px 0;
+  height: 44px;
+  flex-shrink: 0;
+}
+.bg-time { font-size: 15px; font-weight: 600; letter-spacing: -0.3px; color: #000; }
+.bg-statusbar-right { display: flex; align-items: center; }
+
+/* 탑 네비 */
+.bg-topnav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 16px;
+  height: 44px;
+  flex-shrink: 0;
+}
+.bg-profile-row { display: flex; align-items: center; gap: 8px; }
+.bg-avatar-img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
+.bg-username { font-size: 16px; font-weight: 800; color: #000; letter-spacing: -0.3px; }
+.bg-topnav-icons { display: flex; gap: 13px; align-items: center; }
+
+/* ─── 상단 통합 가로 스크롤 ─── */
+.top-horizontal-container {
+  display: flex !important;
+  flex-wrap: nowrap;
+  gap: 9px;
+  overflow-x: auto;
+  overflow-y: visible;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 8px 16px 8px 16px;
+  background: #fff;
+  flex-shrink: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+.top-horizontal-container::-webkit-scrollbar { display: none; }
+
+/* 카드 공통 */
+.top-card {
+  flex: 0 0 auto;
+  background: #fff;
+  border: 1px solid #efefef;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 148px;
+}
+.top-card-services {
+  width: 326px;
+}
+
+.top-card-services .top-card-items {
+  padding: 0 8px 12px;
+  justify-content: flex-start;
+}
+.top-card-new {
+  width: 148px;
+  overflow: visible;
+}
+.top-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 12px 0 12px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #111;
+}
+.top-card-items {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 0 0 12px 0;
+}
+.top-card-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 10px;
+  gap: 8px;
+  width: 62px;
+  min-width: 62px;
+  flex: 0 0 62px;
+  font-size: 11px;
+  color: #2a2a2a;
+  text-align: center;
+}
+.bg-service-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+/* New 카드 아이템 */
+.birthday-user {
+  width: 62px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10px;
+  gap: 6px;
+}
+.hat-overlay {
+  position: absolute !important;
+  top: -6px !important;
+  right: -2px !important;
+  width: 24px !important;
+  height: auto !important;
+  z-index: 999 !important;
+  pointer-events: none;
+}
+.new-label {
+  font-size: 11px;
+  color: #2a2a2a;
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* ─── 메인 뷰포트 (세로 스크롤 없음) ─── */
+.main-scroll-viewport {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* 스크롤 콘텐츠 */
+.bg-content {
+  padding: 0 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Friends card */
+.bg-friends-card {
+  border: 1px solid #efefef;
+  border-radius: 8px;
+  overflow: visible;
+}
+.bg-friends-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #000;
+}
+.bg-friends-divider { display: none; }
+.bg-friends-row {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 6px 16px 6px 13px;
+  justify-content: space-between;
+}
+.bg-friends-row:last-child {
+  padding-bottom: 12px;
+}
+.bg-avatars-group {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 1px;
+  background: #fff;
+}
+.bg-avatars-group img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.bg-friends-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 3px;
+  width: 207px;
+  flex-shrink: 0;
+}
+.bg-friends-name { font-size: 15px; font-weight: 600; color: #111; }
+.bg-friends-sub { font-size: 13px; color: #888; }
+.bg-friends-count {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  color: #616161;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* 피드 */
+.bg-feed-item { display: flex; flex-direction: column; gap: 0; margin-top: 12px; }
+.bg-feed-item + .bg-feed-item { margin-top: 20px; }
+.bg-feed-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0 8px;
+}
+.bg-feed-profile-row { display: flex; align-items: center; gap: 8px; }
+.bg-feed-avatar { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
+.bg-feed-name { font-size: 14px; font-weight: 600; color: #111; }
+.bg-add-btn {
+  background: none;
+  border: 1px solid #efefef;
+  border-radius: 14px;
+  padding: 4px 9px;
+  font-size: 12px;
+  color: #111;
+  cursor: pointer;
+}
+.bg-more-icon { width: 20px; height: 20px; display: block; flex-shrink: 0; }
+.bg-feed-card {
+  border-radius: 10px;
+  overflow: hidden;
+}
+.bg-unit-title {
+  padding: 8px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #111;
+  background: linear-gradient(to bottom, #f2f2f2, #fff);
+  border-radius: 10px 10px 0 0;
+}
+.bg-feed-image {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  display: block;
+  border: 1px solid #efefef;
+}
+
+/* 피드 — 본문 텍스트 (Snow Man 카드) */
+.bg-feed-body {
+  padding: 12px 16px 14px;
+  background: #fff;
+  border: 1px solid #efefef;
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+}
+.bg-feed-desc {
+  font-size: 13px;
+  color: #333;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.bg-feed-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-size: 12px;
+  color: #888;
+}
+.bg-feed-meta-right { display: flex; align-items: center; gap: 4px; }
+
+/* 피드 — Hottest clips 섹션 */
+.bg-hottest-section { margin-top: 20px; }
+.bg-hottest-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 10px;
+}
+.bg-hottest-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+}
+.bg-hottest-item {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+}
+.bg-hottest-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.bg-hottest-label {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.3;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+}
+
+/* 탭바 */
+.bg-tabbar {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 84px;
+  background: #fff;
+  border-top: 1px solid rgba(0,0,0,0.08);
+  display: flex;
+  align-items: flex-start;
+  padding-top: 8px;
+  box-shadow: 0 -3px 5px rgba(0,0,0,0.05);
+  z-index: 10;
+}
+
+/* 탭바 공간 확보용 스페이서 */
+.tabbar-spacer {
+  flex-shrink: 0;
+  height: 84px;
+}
+.bg-tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  font-size: 9px;
+  color: #111;
+}
+.bg-tab-active { color: #111; font-weight: 600; }
+.bg-tab-icon {
+  width: 24px;
+  height: 24px;
+  display: block;
+  flex-shrink: 0;
+}
+
+
+
+
+
+/* ─── Friends list collapsed header right ─── */
+.bg-friends-header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.bg-friends-avatars-collapsed {
+  display: flex;
+  align-items: center;
+}
+.bg-friends-avatars-collapsed img {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #fff;
+  margin-left: -8px;
+}
+.bg-friends-avatars-collapsed img:first-child {
+  margin-left: 0;
+}
+
+/* ─── Smart Channel AD ─── */
+/*
+  구조: ul(3개 li) 전체를 단일 translateY로 밀어올림
+  li 1개 높이 = 20px  /  ul 전체 = 60px (3개)
+  타이밍: hold 2s + 전환 0.4s → 1사이클 ≈ 4.8s
+  0%      → translateY(0)      : item-0 표시
+  41.7%   → translateY(0)      : hold 2s 유지  (2 / 4.8 = 41.7%)
+  50%     → translateY(-20px)  : 전환 0.4s     (0.4 / 4.8 = 8.3% → 41.7+8.3=50%)
+  91.7%   → translateY(-20px)  : item-1 hold 2s
+  100%    → translateY(-40px)  : 전환 0.4s → item-2(=item-0 복제) 진입
+  이후 animation-fill-mode 없이 loop → 자동으로 0%로 복귀하며 이음새 없음
+*/
+/* ul 이동 — 기존 유지 */
+@keyframes sca-ticker {
+  0%     { transform: translateY(0);     }
+  41.6%  { transform: translateY(0);     }
+  50%    { transform: translateY(-22px); }
+  91.6%  { transform: translateY(-22px); }
+  100%   { transform: translateY(-44px); }
+}
+
+/*
+  각 li 개별 opacity 애니메이션 (duration 동일: 4.8s)
+  exit 구간(41.6%→50%)과 enter 구간(91.6%→100%)에 싱크를 맞춰
+  클립 경계에 닿기 전에 이미 투명해지도록 fade 구간을 조금 앞당김
+*/
+
+/* item-0: 이동 시작과 동시에 fade-out 시작 → 이동 완료 시 완전 소멸 */
+@keyframes sca-fade-0 {
+  0%    { opacity: 1; }
+  41.6% { opacity: 1; }   /* 이동 시작 시점까지 완전 선명 */
+  50%   { opacity: 0; }   /* 이동 완료와 동시에 완전 소멸 */
+  100%  { opacity: 0; }
+}
+
+/* item-1: 이동 시작과 동시에 fade-in → 이동 완료 시 완전 선명 → 퇴장 이동 중 fade-out */
+@keyframes sca-fade-1 {
+  0%    { opacity: 0; }
+  41.6% { opacity: 0; }   /* 이동 시작 직전까지 투명 */
+  50%   { opacity: 1; }   /* 이동 완료와 동시에 완전 선명 */
+  91.6% { opacity: 1; }   /* 이동 시작 시점까지 완전 선명 */
+  100%  { opacity: 0; }   /* 이동 완료와 동시에 완전 소멸 */
+}
+
+/* item-2 (item-0 복제): 이동 시작과 동시에 fade-in → loop 복귀 시 item-0로 이음새 없이 연결 */
+@keyframes sca-fade-2 {
+  0%    { opacity: 0; }
+  91.6% { opacity: 0; }   /* 이동 시작 직전까지 투명 */
+  100%  { opacity: 1; }   /* 이동 완료와 동시에 완전 선명 → 0%의 item-0(opacity:1)로 자연 연결 */
+}
+
+.smart-channel-ad {
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  height: 48px;
+  border: none;
+  background: #F7F7F7;
+  overflow: hidden;
+}
+
+/* 클립 박스: 1줄(22px)만 노출 */
+.sca-roller {
+  flex: 1;
+  height: 22px;
+  overflow: hidden !important;
+  position: relative;
+}
+
+/* ul: 세 항목을 세로로 쌓고, 전체가 위로 이동 */
+.sca-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  animation: sca-ticker 4.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  will-change: transform;
+}
+
+/* 각 li: 딱 1줄 높이 */
+.sca-item {
+  height: 22px;
+  display: flex;
+  align-items: center;
+  will-change: opacity;
+}
+
+.sca-item:nth-child(1) { animation: sca-fade-0 4.8s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+.sca-item:nth-child(2) { animation: sca-fade-1 4.8s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+.sca-item:nth-child(3) { animation: sca-fade-2 4.8s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+
+.sca-text {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 20px;
+  color: #111;
+  padding: 0 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 브랜드 행 */
+.sca-brand-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px;
+  width: 100%;
+  height: 20px;
+}
+
+.sca-brand-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.sca-brand-name {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 20px;
+  color: #111;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sca-ad-label {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  color: rgba(0,0,0,0.45);
+  font-size: 12px;
+  flex-shrink: 0;
+}
+.sca-ad-label svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+.sca-thumb {
+  width: 80px;
+  height: 48px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.sca-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
