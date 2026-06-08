@@ -538,11 +538,11 @@ body {
   display: flex;
   align-items: center;
   gap: 3px;
-  color: rgba(0,0,0,0.45);
+  color: #616161;
   font-size: 12px;
   flex-shrink: 0;
 }
-.sca-ad-label svg { width: 13px; height: 13px; flex-shrink: 0; }
+.sca-ad-label svg { width: 16px; height: 16px; flex-shrink: 0; }
 
 .sca-thumb {
   width: 80px;
